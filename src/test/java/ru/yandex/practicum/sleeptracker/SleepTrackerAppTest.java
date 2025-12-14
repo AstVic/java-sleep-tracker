@@ -6,7 +6,7 @@ import java.io.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SleepTrackerAppTest {
+public class SleepTrackerAppTest {
 
     @Test
     void shouldLoadAndAnalyzeSleepData() throws IOException {
