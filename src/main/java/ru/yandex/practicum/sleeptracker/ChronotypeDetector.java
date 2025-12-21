@@ -7,6 +7,12 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ChronotypeDetector implements Function<List<SleepingSession>, SleepAnalysisResult> {
+    final String owl = "Сова";
+    final String pigeon = "Голубь";
+    final String lark = "Жаворонок";
+
+    LocalTime timeToSleep = LocalTime.of(23, 0);
+    LocalTime timeToWakeUp = LocalTime.of(6, 0);
 
     @Override
     public SleepAnalysisResult apply(List<SleepingSession> sessions) {
@@ -51,12 +57,12 @@ public class ChronotypeDetector implements Function<List<SleepingSession>, Sleep
         LocalTime sleep = session.getSessionStart().toLocalTime();
         LocalTime wake = session.getSessionFinish().toLocalTime();
 
-        if ((sleep.isAfter(LocalTime.of(23, 0)) || sleep.isBefore(LocalTime.of(6, 0)))
-                && wake.isAfter(LocalTime.of(9, 0))) {
+        if ((sleep.isAfter(timeToSleep) || sleep.isBefore(timeToWakeUp))
+                && wake.isAfter(timeToWakeUp)) {
             return Chronotype.OWL;
         }
 
-        if (sleep.isBefore(LocalTime.of(22, 0)) && wake.isBefore(LocalTime.of(7, 0))) {
+        if (sleep.isBefore(timeToSleep) && wake.isBefore(timeToWakeUp)) {
             return Chronotype.LARK;
         }
 

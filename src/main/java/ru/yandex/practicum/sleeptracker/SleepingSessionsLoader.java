@@ -23,7 +23,8 @@ public class SleepingSessionsLoader {
                     .map(line -> {
                         try {
                             return new SleepingSession(line);
-                        } catch (SleepTrackerException | RuntimeException e) {
+                        } catch (SleepTrackerException e) {
+                            System.out.println(e.getMessage());
                             return null;
                         }
                     })
